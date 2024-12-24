@@ -3,6 +3,7 @@ package wav.hmed.orderservice.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import wav.hmed.orderservice.model.Order;
 import wav.hmed.orderservice.model.ProductResponse;
 import wav.hmed.orderservice.repository.OrderRepository;
@@ -50,7 +51,7 @@ public class OrderService {
     public ProductResponse getProduct(Long id) {
         return webClientBuilder.build()
                 .get()
-                .uri("http://product-service/api/products/" + id)
+                .uri("http://localhost:8081/api/products/" + id)
                 .retrieve()
                 .bodyToMono(ProductResponse.class)
                 .block();
